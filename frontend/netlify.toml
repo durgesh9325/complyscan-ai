@@ -8,12 +8,12 @@
 # ---------------------------------------------------------------------------
 # API proxy -> Railway backend
 #
-# IMPORTANT: niche apna Railway URL daalo (https:// wale ke bina trailing slash)
-# Example: https://complyscan-api-production.up.railway.app
+# Frontend relative /api/... calls ko Railway backend par forward karta hai,
+# isliye CORS setup ki zarurat nahi padti.
 # ---------------------------------------------------------------------------
 [[redirects]]
   from = "/api/*"
-  to = "https://REPLACE-WITH-YOUR-RAILWAY-URL.up.railway.app/api/:splat"
+  to = "https://complyscan-ai-production.up.railway.app/api/:splat"
   status = 200
   force = true
 
