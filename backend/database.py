@@ -5,11 +5,24 @@ Uses SQLite for self-contained, high-performance persistence.
 
 import sqlite3
 import json
+import os
 import uuid
 import datetime
 from typing import Dict, Any, List, Optional
 
-DB_FILE = "C:/Users/admin/Desktop/website/backend/complyscan.db"
+# DB location, resolved in this order:
+#   1. DB_PATH env var - set this to point at a mounted Railway volume so the
+#      data survives redeploys. Without a volume the DB is rebuilt from seed
+#      data on every deploy.
+#   2. A complyscan.db sitting next to this file - works on any OS, and inside
+#      the container that resolves to /app/complyscan.db.
+# Never hardcode an absolute path here: a Windows path like C:/... cannot be
+# opened by the Linux container and the app dies on startup with
+# "sqlite3.OperationalError: unable to open database file".
+DB_FILE = os.environ.get(
+    "DB_PATH",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "complyscan.db"),
+)
 
 def get_db():
     conn = sqlite3.connect(DB_FILE)
