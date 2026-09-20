@@ -1,0 +1,26 @@
+# Railway / Netlify deployment
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Local databases (Railway par fresh seed hoga)
+*.db
+*.db-journal
+
+# Node
+node_modules/
+dist/
+dist-ssr/
+
+# Env & editor
+.env
+.env.local
+.env.*.local
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
